@@ -1,0 +1,154 @@
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        // Array for book title, price, and stock
+        string[,] Books = 
+        {
+            {"Golden Scenery of Tomorrow", "I Love You Since 1892", "Mistakes We Can't Laugh About", "Pursuing Our Freedom", "Stay Awake, Agatha", "Hold You Accountable", "Salamisim", "Taste of Blood", "If Only You Knew", "Our Asymptotic Love Story"},
+            {"500.00", "800.00", "750.00", "550.00", "350.00", "400.00", "330.00", "280.00", "299.00", "600.00"},
+            {"15", "10", "6", "9", "12", "14", "17", "4", "8", "6"}
+        };
+
+        bool roamAround = true;
+        double grandTotal = 0;
+
+        while (roamAround)
+        {
+            // Display books
+            Console.WriteLine("\nHere are the books displayed in my bookstore:");
+            for (int col = 0; col < 10; col++)
+            {
+                Console.WriteLine($"{col + 1} {Books[0, col]}");
+            }
+
+            int choice = 0;
+            bool validInput = false;
+
+            while (!validInput)
+            {
+                Console.Write("\nEnter the number of the book you want to buy: ");
+                try
+                {
+                    choice = Convert.ToInt32(Console.ReadLine());
+
+                    if (choice >= 1 && choice <= Books.GetLength(1))
+                    {
+                        validInput = true;
+
+                        int number = choice - 1;
+                        string bookName = Books[0, number];
+                        double price = Convert.ToDouble(Books[1, number]);
+                        int stock = Convert.ToInt32(Books[2, number]);
+
+                        Console.WriteLine($"You selected the book named {bookName}.");
+                        Console.WriteLine($"The price of that book is ${price}.");
+                        Console.WriteLine($"The stock left of that book is {stock}.");
+
+                        // Ask for quantity
+                        int quantity = 0;
+                        bool validQuantity = false;
+
+                        while (!validQuantity)
+                        {
+                            Console.Write($"\nHow many copies do you want to buy the {bookName} book? ");
+                            try
+                            {
+                                quantity = Convert.ToInt32(Console.ReadLine());
+
+                                if (quantity > stock)
+                                {
+                                    Console.WriteLine($"Invalid Quantity! Only {stock} copies stock left.");
+                                }
+                                else if (quantity == 0)
+                                {
+                                    // User entered 0, still charge 1 copy
+                                    validQuantity = true;
+                                    quantity = 1;
+                                    double total = price * quantity;
+                                    stock -= quantity;
+                                    Books[2, number] = stock.ToString();
+
+                                    grandTotal += total;
+
+                                    Console.WriteLine($"You chose 0 copies, but you still need to pay for the {bookName} book.");
+                                    Console.WriteLine($"The total price of this purchase is {total}.00.");
+                                    Console.WriteLine($"The grand total of all purchases is {grandTotal}.00.");
+                                    Console.WriteLine($"The stock left of {bookName} is {stock}.");
+                                }
+                                else
+                                {
+                                    // Use the quantity the user entered
+                                    validQuantity = true;
+                                    double total = price * quantity;
+                                    stock -= quantity;
+                                    Books[2, number] = stock.ToString();
+
+                                    grandTotal += total;
+
+                                    Console.WriteLine($"Y1ou bought {quantity} copies of {bookName}.");
+                                    Console.WriteLine($"The total price of this purchase is {total}.00.");
+                                    Console.WriteLine($"The grand total of all purchases is {grandTotal}.00.");
+                                    Console.WriteLine($"The stock left of {bookName} is {stock}.");
+                                }
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid Input! Please enter a number.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Book Number!");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid Input. Please enter a number.");
+                }
+            }
+
+            // Ask if the user wants to buy another book
+            Console.Write("\nDo you want to buy another book? (yes/no) ");
+            string answer = Console.ReadLine().ToLower();
+            if (answer == "no")
+            {
+                roamAround = false;
+                Console.WriteLine($"Your total payment is {grandTotal}.00");
+                
+                //ask for the money the user gives
+                bool paid = false;
+                                    
+                while (!paid)
+                {
+                    Console.WriteLine($"How much money will you give to me? ");
+                    try 
+                    {
+                        double money = Convert.ToDouble(Console.ReadLine());
+                        if (money >= grandTotal)
+                        {
+                            double change = money - grandTotal;
+                            Console.WriteLine($"You paid {money}.00. Your change is {change}.00.");
+                            Console.WriteLine("Thank you for visiting my bookstore! Come back again next time hehe.");
+                            paid = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Insufficient Money!");
+                            Console.WriteLine($"Please pay full OR I'll have you arrest!");
+                        }
+                    }
+                    catch    
+                    {
+                        Console.WriteLine("Invalid Money Input!");
+                    }
+                }
+            }
+        }
+    }
+}
+
+    
