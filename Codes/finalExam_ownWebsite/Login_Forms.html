@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "style.css">
+    <title>Login Page</title>
+</head>
+<body>
+    
+    <section class = "login-page">
+        <div class = "login-box">
+            <h2 class = "h2">Login Here Po</h2>
+            <label for = "username">Username</label>
+                <input type = "text" id = "username" placeholder= "Input Your Username">
+
+            <label for = "password">Password</label>
+                <input type = "password" id = "password" placeholder= "Input Your Password">
+            <button onclick = "login()">Login</button>
+            <p id = "message"></p>
+        </div>
+
+        <!--SIDE BY SIDE WITH THE LOGIN BOX-->
+
+        <div class = "contentHere">
+            <p>Welcome To My Own Website!</p>
+
+            <p>Please login first so that you can go in HEHE.</p>
+            
+            
+        </div>
+
+    </section>
+    <script>
+        function login() {
+            const userName = document.getElementById('username').value;
+            const passWord = document.getElementById('password').value;
+
+            if (userName == "Music_Major18" && passWord == "SonixBand") {
+                document.getElementById('message').style.color = "green";
+                document.getElementById('message').textContent= "You May Now Proceed HEHE";
+
+                setTimeout (() => {
+                    window.location.href = "Home.html";
+                }, 1000);
+            } else {
+                document.getElementById('message').style.color = "red";
+                document.getElementById('message').textContent = "Please Try Again. Invalid Input!";
+            }
+        }
+    </script>
+    
+</body>
+</html>

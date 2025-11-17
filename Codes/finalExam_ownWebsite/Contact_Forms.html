@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "style.css">
+    <title>Contact Forms</title>
+</head>
+<body>
+
+    <!--NAVIGATION BAR-->
+    <div class = "navbar">
+        <h1 class = "logo">Music Journey</h1>
+
+    <div class = "nav-links">
+        <a href = "Home.html">Home</a>
+        <a href = "About_Me.html">About Me</a>
+        <a href = "Contact_Forms.html">Contact Forms</a>
+        <a href = "Dashboard.html">Dashboard</a>
+
+    </div>
+
+        <label for = "toggle" class = "hamburger">&#9776;</label>
+    </div>
+
+    <!--CHECKBOX-->
+
+    <input type = "checkbox" id = "toggle">
+
+    <!--SIDEBAR-->
+    
+    <div id = "sidebar">
+        <a href = "Home.html">Home</a>
+        <a href = "About_Me.html">About Me</a>
+        <a href = "Contact_Forms.html">Contact Forms</a>
+        <a href = "Dashboard.html">Dashboard</a>
+    </div>
+
+    <!--OVERLAY-->
+
+    <div id = "overlay"></div>
+
+    <!--MAIN CONTENT-->
+
+    <div class = "content">
+        
+    </div>
+
+    <!--CONTACT FORMS INPUT BOX-->
+
+    <section class = "contact-page">
+        <div class = "contact-box">
+            <h2>Contact Us</h2>
+
+                <label for = "name">Name</label>
+                <input type = "name" id = "fullName" placeholder = "Enter Your Full Name">
+
+                <label for = "email">Email Address</label>
+                <input type = "email" id = "emailAddress" placeholder = "Enter Your Email Address">
+
+                <label for = "number">Phone Number</label>
+                <input type = "number" id = "phoneNumber" placeholder = "Enter Your Phone Number">
+
+                <label for = "thoughts">Message</label>
+                <input type = "thoughts" id = "Message" placeholder = "Enter Your Message">
+                
+            <button onclick = "contact()">Submit</button>
+            <p id = "message" style = "text-align: center; color: blue;"></p>
+        
+        </div>
+    </section>
+    <script>
+        function contact() {
+            const full_name = document.getElementById('fullName').value;
+            const email_address = document.getElementById('emailAddress').value;
+            const phone_number = document.getElementById("phoneNumber").value;
+            const meSSage = document.getElementById('Message').value;
+
+            if (full_name == "Gianna A. Culpa" && email_address == "culpa.gianna@cec.edu.ph" && phone_number == "09656793289" && meSSage == "HEHE") {
+                document.getElementById('message').style.color = "blue";
+                document.getElementById('message').textContent = "Gorabels!";
+
+                setTimeout (() => {
+                    window.location.href = "About_Me.html";
+                }, 1000);
+            } else {
+                document.getElementById('message').style.color = "green";
+                document.getElementById('message').textContent = "HAHA di ma open badii!";
+            }
+        }
+    </script>
+</body>
+</html>
